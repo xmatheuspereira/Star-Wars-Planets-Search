@@ -14,6 +14,7 @@ const Table = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   useEffect(() => {
+    console.log(selectedFilters);
   }, [selectedFilters]);
 
   const getFilteredPlanets = (row) => {
@@ -88,6 +89,37 @@ const Table = () => {
           Filtrar
         </button>
       </header>
+      <div>
+        {selectedFilters.map((index) => (
+          <div data-testid="filter" key={ index }>
+            {/* {`${selected.column} ${selectedFilters.comparasion}`} */}
+            <button
+              type="button"
+              onClick={ () => {
+                const cloneArr = [...selectedFilters];
+                cloneArr.pop();
+                setSelectedFilters(cloneArr);
+              } }
+            >
+              {}
+              x
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ () => {
+            const cloneArr = [...selectedFilters];
+            while (cloneArr.length > 0) {
+              cloneArr.pop();
+            }
+            setSelectedFilters(cloneArr);
+          } }
+        >
+          Remover filtros
+        </button>
+      </div>
       <table>
         <thead>
           <tr>
